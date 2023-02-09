@@ -1,5 +1,7 @@
 package simulator.model;
 
+import org.json.JSONObject;
+
 public class PhysicsSimulator {
 	
 	private double RealTimePerStep;
@@ -34,6 +36,13 @@ public class PhysicsSimulator {
 	public JSONObject getState()
 	{
 		
+		return null;
+		
+	}
+	
+	public String toString()
+	{
+		return "";
 	}
 	
 }
