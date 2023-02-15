@@ -1,5 +1,11 @@
 package simulator.control;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import simulator.factories.Factory;
+import simulator.model.Body;
+import simulator.model.ForceLaws;
 import simulator.model.PhysicsSimulator;
 
 public class Controller {

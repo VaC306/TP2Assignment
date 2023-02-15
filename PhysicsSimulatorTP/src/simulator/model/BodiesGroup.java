@@ -1,10 +1,10 @@
 package simulator.model;
 
 import java.util.List;
-
+import simulator.misc.Vector2D;
 import org.json.JSONObject;
 
-public class BodiesGroup {
+public class BodiesGroup extends Body{
 	
 	private String id;
 	private ForceLaws force;
@@ -12,6 +12,7 @@ public class BodiesGroup {
 	
 	public BodiesGroup()
 	{
+		super(id, id, position, force, position, mass); //verse esto
 		//rellenar
 	}
 	
@@ -30,9 +31,14 @@ public class BodiesGroup {
 		
 	}
 	
+	@Override
 	void advance(double dt)
 	{
-		
+		for(Body b: lb) //llamar al resetForce de cada body
+		{
+			b.resetForce();
+		}
+		//rellenar
 	}
 	
 	public JSONObject getState()

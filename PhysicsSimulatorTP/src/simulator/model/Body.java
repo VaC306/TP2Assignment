@@ -1,9 +1,8 @@
 package simulator.model;
 import org.json.JSONObject;
-
 import simulator.misc.Vector2D;
 
-public abstract class Body {
+public abstract class Body{
 	
 	protected String id;
 	protected String gid;
@@ -12,21 +11,27 @@ public abstract class Body {
 	protected Vector2D position;
 	protected double mass;
 	
-	public Body(String id, String gid, Vector2D velocity, Vector2D force, Vector2D position, double mass) 
+	public Body(String id, String gid, Vector2D velocity, Vector2D force, Vector2D position, double mass)
 	{
-		super();
-		this.id = id;
-		this.gid = gid;
-		this.velocity = velocity;
-		this.force = force;
-		this.position = position;
-		this.mass = mass;
+	super();
+	 if (id == null || gid == null || velocity == null || position == null) {
+         throw new IllegalArgumentException("Invalid input: parameters cannot be null.");
+     }
+     if (id.trim().length() == 0 || gid.trim().length() == 0) {
+         throw new IllegalArgumentException("Invalid input: identifier or group identifier cannot be empty.");
+     }
+     if (mass <= 0) {
+         throw new IllegalArgumentException("Invalid input: mass must be positive.");
+     }
+		
+	this.id = id;
+    this.gid = gid;
+    this.velocity = velocity;
+    this.position = position;
+    this.mass = mass;
+    this.force = new Vector2D(0, 0);
 	}
 	
-	if((this.id || this.gid || this.velocity || this.force || this.position || this.mass) == null)
-	{
-		//throw IllegalArgumentException;
-	}
 	
 	public String getId()
 	{
@@ -69,14 +74,11 @@ public abstract class Body {
 		//ponerlo a 0, 0
 	}
 	
-	abstract advance (double dt)
-	{
-		//move the body for dt seconds
-	}
+	abstract void advance (double dt);
 	
 	public JSONObject getState()
 	{
-		
+		return null;
 	}
 	
 	public String toString()
