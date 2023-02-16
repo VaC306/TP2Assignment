@@ -69,17 +69,21 @@ public abstract class Body{
 		this.force.plus(f);
 	}
 	
-	void resetForce()
-	{
-		//ponerlo a 0, 0
-	}
+	public void resetForce() {
+        this.force = new Vector2D(0, 0);
+    }
 	
 	abstract void advance (double dt);
 	
-	public JSONObject getState()
-	{
-		return null;
-	}
+	 public JSONObject getState() {
+	        JSONObject obj = new JSONObject();
+	        obj.put("id", this.id);
+	        obj.put("m", this.mass);
+	        obj.put("p", this.position.toJSONArray()); //ver esta funcvion
+	        obj.put("v", this.velocity.toJSONArray());
+	        obj.put("f", this.force.toJSONArray());
+	        return obj;
+	    }
 	
 	public String toString()
 	{

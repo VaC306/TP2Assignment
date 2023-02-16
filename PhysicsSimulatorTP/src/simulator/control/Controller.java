@@ -3,6 +3,9 @@ package simulator.control;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import simulator.factories.Factory;
 import simulator.model.Body;
 import simulator.model.ForceLaws;
@@ -16,6 +19,8 @@ public class Controller {
 	
 	public void loadData(InputStream in)
 	{
+		JSONObject jsonInupt = new JSONObject(new JSONTokener(in));
+		//addGroup
 		
 	}
 	
