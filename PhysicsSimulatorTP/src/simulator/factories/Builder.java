@@ -12,6 +12,7 @@ public abstract class Builder<T> {
 		
 		_typeTag = typeTag;
 		_desc = desc;
+		
 	}
 
 	public String getTypeTag() {

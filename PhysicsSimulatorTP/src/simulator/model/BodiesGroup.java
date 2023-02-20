@@ -1,20 +1,26 @@
 package simulator.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import simulator.misc.Vector2D;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class BodiesGroup extends Body{
+public class BodiesGroup {
 	
 	private String id;
-	private ForceLaws force;
-	List<Body> lb;
+	private ForceLaws forceLaws;
+	List<Body> bodies;
 	
-	public BodiesGroup()
-	{
-		super(id, id, position, force, position, mass); //verse esto
-		//rellenar
-	}
+	 public BodiesGroup(String id, ForceLaws forceLaws) {
+	        if (id == null || forceLaws == null || id.trim().length() == 0) {
+	            throw new IllegalArgumentException("Invalid arguments");
+	        }
+	        this.id = id;
+	        this.forceLaws = forceLaws;
+	        this.bodies = new ArrayList<>();
+	    }
 	
 	public String getId()
 	{
@@ -23,30 +29,48 @@ public class BodiesGroup extends Body{
 	
 	void setForceLaws(ForceLaws fl)
 	{
-		this.force = fl;
+		if (fl == null) 
+		{
+			throw new IllegalArgumentException("Invalid force laws");
+	    }
+	    this.forceLaws = fl;
 	}
 	
 	void addBody(Body b)
 	{
-		
+		if (b == null || bodies.contains(b) || bodies.stream().anyMatch(body -> body.equals(b))) {
+            throw new IllegalArgumentException("Invalid body");
+        }
+        this.bodies.add(b);
 	}
 	
-	@Override
 	void advance(double dt)
 	{
-		for(Body b: lb) //llamar al resetForce de cada body
-		{
-			b.resetForce();
-		}
-		//rellenar
+		if (dt <= 0) {
+            throw new IllegalArgumentException("Invalid time step");
+        }
+        for (Body body : bodies) {
+            body.resetForce();
+        }
+        forceLaws.apply(bodies);
+        for (Body body : bodies) {
+            body.advance(dt); //ver
+        }
 	}
 	
 	public JSONObject getState()
 	{
-		return null;
-		//rellenar
+		 JSONObject state = new JSONObject();
+	        state.put("id", id);
+	        JSONArray bodiesJson = new JSONArray();
+	        for (Body body : bodies) {
+	            bodiesJson.put(body.getState());
+	        }
+	        state.put("bodies", bodiesJson);
+	        return state;
 	}
 	
+	@Override
 	public String toString() 
 	{
 		return "";

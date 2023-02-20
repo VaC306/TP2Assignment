@@ -85,9 +85,22 @@ public abstract class Body{
 	        return obj;
 	    }
 	
+	
 	public String toString()
 	{
 		return getState().toString();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj) {
+	        return true;
+	    }
+	    if (obj == null || getClass() != obj.getClass()) {
+	        return false;
+	    }
+	    Body other = (Body) obj;
+	    return id.equals(other.id);
 	}
 	
 }
