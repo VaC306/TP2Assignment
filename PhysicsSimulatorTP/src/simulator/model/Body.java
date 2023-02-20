@@ -79,9 +79,9 @@ public abstract class Body{
 	        JSONObject obj = new JSONObject();
 	        obj.put("id", this.id);
 	        obj.put("m", this.mass);
-	        obj.put("p", this.position.toJSONArray()); //ver esta funcvion
-	        obj.put("v", this.velocity.toJSONArray());
-	        obj.put("f", this.force.toJSONArray());
+	        obj.put("p", this.position); //ver esta funcvion
+	        obj.put("v", this.velocity);
+	        obj.put("f", this.force);
 	        return obj;
 	    }
 	
