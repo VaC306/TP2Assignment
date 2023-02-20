@@ -11,7 +11,7 @@ public abstract class Body{
 	protected Vector2D position;
 	protected double mass;
 	
-	public Body(String id, String gid, Vector2D velocity, Vector2D force, Vector2D position, double mass)
+	Body(String id, String gid, Vector2D velocity, Vector2D force, Vector2D position, double mass)
 	{
 	super();
 	 if (id == null || gid == null || velocity == null || position == null) {
@@ -101,6 +101,14 @@ public abstract class Body{
 	    }
 	    Body other = (Body) obj;
 	    return id.equals(other.id);
+	}
+	
+	@Override
+	public int hashCode() {
+	    int result = 17; // arbitrary prime number
+	    result = 31 * result + id.hashCode();
+	    result = 31 * result + gid.hashCode();
+	    return result;
 	}
 	
 }

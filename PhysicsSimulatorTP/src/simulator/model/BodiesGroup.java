@@ -13,7 +13,7 @@ public class BodiesGroup {
 	private ForceLaws forceLaws;
 	List<Body> bodies;
 	
-	 public BodiesGroup(String id, ForceLaws forceLaws) {
+	 BodiesGroup(String id, ForceLaws forceLaws) {
 	        if (id == null || forceLaws == null || id.trim().length() == 0) {
 	            throw new IllegalArgumentException("Invalid arguments");
 	        }
