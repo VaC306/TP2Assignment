@@ -81,4 +81,9 @@ public class PhysicsSimulator {
         return getState().toString();
     }
 	
+	public void setDeltaTime(double dt)
+	{
+		
+	}
+	
 }
