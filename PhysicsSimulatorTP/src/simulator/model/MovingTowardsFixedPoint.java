@@ -26,5 +26,10 @@ public class MovingTowardsFixedPoint implements ForceLaws{
 	            b.addForce(force);
 	        }
 	    }
+	    
+	    @Override
+	    public String toString() {
+	        return String.format("MovingTowardsFixedPoint{c=%s, g=%.2f}\n", c, g);
+	    }
 
 }

@@ -73,7 +73,7 @@ public class BodiesGroup {
 	@Override
 	public String toString() 
 	{
-		return "";
+		return getState().toString();
 	}
 	
 }

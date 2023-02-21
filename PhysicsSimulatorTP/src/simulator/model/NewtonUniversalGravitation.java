@@ -29,5 +29,9 @@ public class NewtonUniversalGravitation implements ForceLaws{
 	            }
 	        }
 	    }
-	
+	    
+	    @Override
+	    public String toString() {
+	        return "Newton's Universal Gravitation Law (G = " + G + ")\n";
+	    }
 }

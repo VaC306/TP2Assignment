@@ -9,9 +9,7 @@ public class NoForce implements ForceLaws{
 		//This method should be empty
 	}
 	
-	public String toString()
-	{
-		return "";
+	public String toString() {
+	    return "No Force\n";
 	}
-	
 }
