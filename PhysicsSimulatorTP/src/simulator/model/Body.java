@@ -63,7 +63,6 @@ public abstract class Body{
 		return this.mass;
 	}
 	
-	
 	void addForce(Vector2D f)
 	{
 		this.force.plus(f);
