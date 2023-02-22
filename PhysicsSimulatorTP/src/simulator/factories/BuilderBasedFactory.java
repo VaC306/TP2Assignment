@@ -1,5 +1,6 @@
 package simulator.factories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -51,11 +52,73 @@ public class BuilderBasedFactory<T> implements Factory{
 	            throw new IllegalArgumentException("Invalid object type: " + type);
 	    }
 	}
+	
+	/*
+	public class BodyBuilder implements Builder<Body> {
+	    @Override
+	    public Body createInstance(JSONObject info) {
+	        String id = info.getString("id");
+	        double mass = info.getDouble("mass");
+	        Vector2D position = new Vector2D(info.getJSONArray("pos").getDouble(0), info.getJSONArray("pos").getDouble(1));
+	        Vector2D velocity = new Vector2D(info.getJSONArray("vel").getDouble(0), info.getJSONArray("vel").getDouble(1));
+	        Vector2D acceleration = new Vector2D(info.getJSONArray("acc").getDouble(0), info.getJSONArray("acc").getDouble(1));
+	        return new Body(id, mass, position, velocity, acceleration);
+	    }
+	}
 
+	public class StationaryBodyBuilder implements Builder<StationaryBody> {
+	    @Override
+	    public StationaryBody createInstance(JSONObject info) {
+	        String id = info.getString("id");
+	        double mass = info.getDouble("mass");
+	        Vector2D position = new Vector2D(info.getJSONArray("pos").getDouble(0), info.getJSONArray("pos").getDouble(1));
+	        return new StationaryBody(id, mass, position);
+	    }
+	}
+
+	public class MassiveBodyBuilder implements Builder<MassiveBody> {
+	    @Override
+	    public MassiveBody createInstance(JSONObject info) {
+	        String id = info.getString("id");
+	        double mass = info.getDouble("mass");
+	        double radius = info.getDouble("radius");
+	        Vector2D position = new Vector2D(info.getJSONArray("pos").getDouble(0), info.getJSONArray("pos").getDouble(1));
+	        Vector2D velocity = new Vector2D(info.getJSONArray("vel").getDouble(0), info.getJSONArray("vel").getDouble(1));
+	        Vector2D acceleration = new Vector2D(info.getJSONArray("acc").getDouble(0), info.getJSONArray("acc").getDouble(1));
+	        return new MassiveBody(id, mass, radius, position, velocity, acceleration);
+	    }
+	}
+
+	public class FixedHookBuilder implements Builder<FixedHook> {
+	    @Override
+	    public FixedHook createInstance(JSONObject info) {
+	        String id = info.getString("id");
+	        Vector2D position = new Vector2D(info.getJSONArray("pos").getDouble(0), info.getJSONArray("pos").getDouble(1));
+	        return new FixedHook(id, position);
+	    }
+	}
+
+	public class SpringBuilder implements Builder<Spring> {
+	    @Override
+	    public Spring createInstance(JSONObject info) {
+	        String id = info.getString("id");
+	        double constant = info.getDouble("k");
+	        double restLength = info.getDouble("length");
+	        String body1Id = info.getJSONArray("bodies").getString(0);
+	        String body2Id = info.getJSONArray("bodies").getString(1);
+	        return new Spring(id, constant, restLength, body1Id, body2Id);
+	    }
+	}
+	*/
+	
+	
 	@Override
-	public List getInfo() {
-		
-		return null;
+	public List<JSONObject> getInfo() {
+	    List<JSONObject> infoList = new ArrayList<>();
+	    for (Builder<T> builder : builders) {
+	        infoList.add(builder.getInfo());
+	    }
+	    return infoList;
 	}
 	
 	void addBuilder(Builder<T> b)
