@@ -7,6 +7,11 @@ import simulator.model.StationaryBody;
 
 public class StationaryBodyBuilder extends Builder<StationaryBody> {
 	
+
+	public StationaryBodyBuilder(String typeTag, String desc) {
+		super(typeTag, desc);
+	}
+
 	@Override
     public StationaryBody createInstance(JSONObject info) {
         String id = info.getString("id");
