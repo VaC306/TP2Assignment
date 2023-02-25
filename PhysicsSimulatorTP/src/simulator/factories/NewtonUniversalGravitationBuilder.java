@@ -12,7 +12,8 @@ public class NewtonUniversalGravitationBuilder extends Builder<NewtonUniversalGr
 
 	@Override
 	protected NewtonUniversalGravitation createInstance(JSONObject data) {
-		return null;
+		double G = data.getDouble("G");
+		return new NewtonUniversalGravitation(G);
 	}
 
 }

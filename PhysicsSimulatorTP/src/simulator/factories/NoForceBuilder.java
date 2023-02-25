@@ -12,7 +12,7 @@ public class NoForceBuilder extends Builder<NoForce>{
 
 	@Override
 	protected NoForce createInstance(JSONObject data) {
-		return null;
+		return new NoForce();
 	}
 
 }

@@ -83,7 +83,7 @@ public class PhysicsSimulator {
 	
 	public void setDeltaTime(double dt)
 	{
-		
+		this.timePerStep = dt;
 	}
 	
 }
