@@ -7,7 +7,12 @@ import simulator.model.MovingBody;
 import simulator.model.MovingTowardsFixedPoint;
 
 public class MovingTowardsFixedPointBuilder extends Builder<MovingTowardsFixedPoint>{
-
+	
+	public MovingTowardsFixedPointBuilder() 
+	{
+		super("mtfp", "b");
+	}
+	
 	public MovingTowardsFixedPointBuilder(String typeTag, String desc) {
 		super(typeTag, desc);
 	}

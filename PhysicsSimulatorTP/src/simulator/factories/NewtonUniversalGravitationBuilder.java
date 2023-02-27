@@ -5,7 +5,12 @@ import org.json.JSONObject;
 import simulator.model.NewtonUniversalGravitation;
 
 public class NewtonUniversalGravitationBuilder extends Builder<NewtonUniversalGravitation>{
-
+	
+	public NewtonUniversalGravitationBuilder() 
+	{
+		super("nlug", "a");
+	}
+	
 	public NewtonUniversalGravitationBuilder(String typeTag, String desc) {
 		super(typeTag, desc);
 	}

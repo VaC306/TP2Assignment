@@ -7,7 +7,12 @@ import simulator.model.StationaryBody;
 
 public class StationaryBodyBuilder extends Builder<StationaryBody> {
 	
-
+	
+	public StationaryBodyBuilder () 
+	{
+		super("st_body", "a");
+	}
+	
 	public StationaryBodyBuilder(String typeTag, String desc) {
 		super(typeTag, desc);
 	}
