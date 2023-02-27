@@ -1,11 +1,10 @@
 package simulator.control;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -32,35 +31,35 @@ public class Controller {
 
         // Add groups
         JSONArray groups = jsonInput.getJSONArray("groups");
-        for (int i = 0; i < groups.length(); i++) {
-            String groupId = groups.getString(i);
+        
+        //we add each group
+        for (Object g: groups) {
+            String groupId = g.toString();
             ps.addGroup(groupId);
         }
 	}
 	
 	public void run(int n, OutputStream out)
 	{
-		 JSONObject result = new JSONObject();
-	        JSONArray states = new JSONArray();
+		PrintStream p = new PrintStream(out);
 
-	        // Add initial state
-	        states.put(ps.getState());
+	    // Add initial state
+		p.println("{");
+		p.println("\"states\": [");
 
-	        // Run simulation
-	        for (int i = 0; i < n; i++) {
-	            ps.advance();
-	            states.put(ps.getState());
-	        }
-
-	        result.put("states", states);
-
-	        // Write output to stream
-	        try {
-				out.write(result.toString(2).getBytes());
-			} catch (JSONException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+	    // Run simulation
+	    for(int i=0;i<n;i++) 
+	    {
+			ps.advance();
+			p.print(ps.getState());
+			
+			if(i+1!=n) 	
+			{
+				p.print(", ");
 			}
+		}
+	    // Write output to stream
+	    p.println("]");
+	    p.println("}");
 	 }
 }

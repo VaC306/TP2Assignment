@@ -34,7 +34,8 @@ public class Main {
 	private static Factory<Body> _bodyFactory;
 	private static Factory<ForceLaws> _forceLawsFactory;
 
-	private static void initFactories() {
+	private static void initFactories() 
+	{
 
 	}
 
