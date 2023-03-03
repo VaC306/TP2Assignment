@@ -18,7 +18,19 @@ public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>{
 
 	@Override
 	protected NewtonUniversalGravitation createInstance(JSONObject data) {
-		double G = data.getDouble("G");
+		//if input is null
+		if(data == null) {
+			throw new IllegalArgumentException("Invalid input: parameter cannot be null.");
+		}
+		
+		//default value
+		double G=6.67E-11;
+		
+		if(data.has("G"))
+		{
+			G = data.getDouble("G");
+		}
+		
 		return new NewtonUniversalGravitation(G);
 	}
 

@@ -1,4 +1,5 @@
 package simulator.model;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import simulator.misc.Vector2D;
 
@@ -29,7 +30,7 @@ public abstract class Body{
     this.velocity = velocity;
     this.position = position;
     this.mass = mass;
-    this.force = new Vector2D(0, 0);
+    this.force = new Vector2D();
 	}
 	
 	
@@ -63,26 +64,41 @@ public abstract class Body{
 		return this.mass;
 	}
 	
-	void addForce(Vector2D f)
-	{
-		this.force.plus(f);
+	void addForce(Vector2D fuerza) {
+		this.force = force.plus(fuerza);
 	}
 	
 	public void resetForce() {
-        this.force = new Vector2D(0, 0);
+        this.force = new Vector2D();
     }
 	
 	abstract void advance (double dt);
 	
-	 public JSONObject getState() {
-	        JSONObject obj = new JSONObject();
-	        obj.put("id", this.id);
-	        obj.put("m", this.mass);
-	        obj.put("p", this.position); //ver esta funcvion
-	        obj.put("v", this.velocity);
-	        obj.put("f", this.force);
-	        return obj;
-	    }
+	 public JSONObject getState() 
+	 {
+
+		JSONObject body = new JSONObject();
+			
+		JSONArray b1 = new JSONArray();
+		b1.put(position.getX());
+		b1.put(position.getY());
+		body.put("p", b1);
+			
+		JSONArray b2 = new JSONArray();
+		b2.put(velocity.getX());
+		b2.put(velocity.getY());
+		body.put("v", b2);
+			
+		JSONArray b3 = new JSONArray();
+		b3.put(force.getX());
+		b3.put(force.getY());
+		body.put("f", b3);
+			
+		body.put("id", this.id);
+		body.put("m", this.mass);		
+			
+		return body;
+	 }
 	
 	
 	public String toString()
@@ -110,6 +126,5 @@ public abstract class Body{
 	    result = 31 * result + gid.hashCode();
 	    return result;
 	}
-	
 }
 

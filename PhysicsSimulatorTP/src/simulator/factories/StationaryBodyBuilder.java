@@ -1,5 +1,6 @@
 package simulator.factories;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import simulator.misc.Vector2D;
@@ -20,10 +21,23 @@ public class StationaryBodyBuilder extends Builder<Body> {
 
 	@Override
     public StationaryBody createInstance(JSONObject info) {
-        String id = info.getString("id");
-        String gid = info.getString("gid");
-        double mass = info.getDouble("mass");
-        Vector2D position = new Vector2D(info.getJSONArray("position").getDouble(0), info.getJSONArray("position").getDouble(1));
-        return new StationaryBody(id, gid, position, mass);
-    }
-}
+		//make sure the input is valid
+		if(info == null || !info.has("id")|| !info.has("gid")|| !info.has("p") || !info.has("m")) {
+					
+			throw new IllegalArgumentException("Invalid input");
+		}
+			
+		JSONArray arrayp = info.getJSONArray("p");
+
+		if(arrayp.length()!=2  ) 
+		{		
+			throw new IllegalArgumentException();
+		}
+
+		//creation of thge Vector2D
+		Vector2D p = new Vector2D (arrayp.getDouble(0), arrayp.getDouble(1));
+				
+		return new StationaryBody(info.getString("id"), info.getString("gid"), p, info.getDouble("m") );
+		}
+  }
+

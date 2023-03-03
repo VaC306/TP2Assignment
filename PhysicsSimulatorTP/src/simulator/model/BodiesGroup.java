@@ -13,20 +13,22 @@ public class BodiesGroup {
 	private ForceLaws forceLaws;
 	List<Body> bodies;
 	
-	 BodiesGroup(String id, ForceLaws forceLaws) {
-	        if (id == null || forceLaws == null || id.trim().length() == 0) {
-	            throw new IllegalArgumentException("Invalid arguments");
-	        }
-	        this.id = id;
-	        this.forceLaws = forceLaws;
-	        this.bodies = new ArrayList<>();
-	    }
+	 BodiesGroup(String id, ForceLaws forceLaws) 
+	 {
+		 if (id == null || forceLaws == null || id.trim().length() == 0) 
+		 {
+			 throw new IllegalArgumentException("Invalid arguments");
+	     }
+	     this.id = id;
+	     this.forceLaws = forceLaws;
+	     this.bodies = new ArrayList<>();
+	 }
 	
 	public String getId()
 	{
 		return this.id;
 	}
-	
+
 	void setForceLaws(ForceLaws fl)
 	{
 		if (fl == null) 
@@ -36,12 +38,19 @@ public class BodiesGroup {
 	    this.forceLaws = fl;
 	}
 	
-	void addBody(Body b)
+	void addBody(Body body)
 	{
-		if (b == null || bodies.contains(b) || bodies.stream().anyMatch(body -> body.equals(b))) {
+		/*if (b == null || bodies.contains(b) || bodies.stream().anyMatch(body -> body.equals(b))) {
             throw new IllegalArgumentException("Invalid body");
-        }
-        this.bodies.add(b);
+        }*/
+		for(Body c: bodies) 
+		{
+			if( body ==null || c.id == body.id ) 
+			{	
+				throw new IllegalArgumentException();
+			}
+		}
+        this.bodies.add(body);
 	}
 	
 	void advance(double dt)
@@ -53,8 +62,10 @@ public class BodiesGroup {
             body.resetForce();
         }
         forceLaws.apply(bodies);
-        for (Body body : bodies) {
-            body.advance(dt); //ver
+        
+        for (Body body : bodies) 
+        {
+            body.advance(dt);
         }
 	}
 	
