@@ -11,7 +11,7 @@ public abstract class Body{
 	protected Vector2D position;
 	protected double mass;
 	
-	Body(String id, String gid, Vector2D velocity, Vector2D force, Vector2D position, double mass)
+	Body(String id, String gid, Vector2D position, Vector2D velocity, double mass)
 	{
 	super();
 	 if (id == null || gid == null || velocity == null || position == null) {

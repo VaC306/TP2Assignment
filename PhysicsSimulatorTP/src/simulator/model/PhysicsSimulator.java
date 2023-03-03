@@ -15,7 +15,7 @@ public class PhysicsSimulator {
     private Map<String, BodiesGroup> groups;
     private double currentTime;
 	
-    public PhysicsSimulator(double timePerStep, ForceLaws defaultForceLaws) {
+    public PhysicsSimulator(ForceLaws defaultForceLaws, double timePerStep) {
         if (timePerStep <= 0) {
             throw new IllegalArgumentException("Time per step must be positive.");
         }

@@ -4,8 +4,8 @@ import simulator.misc.Vector2D;
 
 public class MovingBody extends Body{
 
-	public MovingBody(String id, String gid, Vector2D velocity, Vector2D force, Vector2D position, double mass) {
-		super(id, gid, velocity, force, position, mass);
+	public MovingBody(String id, String gid, Vector2D position, Vector2D velocity, double mass) {
+		super(id, gid, position, velocity, mass);
 	}
 	
 	@Override
