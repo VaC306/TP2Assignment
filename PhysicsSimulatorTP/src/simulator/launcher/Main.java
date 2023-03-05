@@ -251,18 +251,20 @@ public class Main {
 
 	private static void startBatchMode() throws Exception {
 		
-		ForceLaws fl=_forceLawsFactory.createInstance(_forceLawsInfo);
-		PhysicsSimulator ps= new PhysicsSimulator(fl, _dtime);
+		ForceLaws fl =_forceLawsFactory.createInstance(_forceLawsInfo);
+		PhysicsSimulator ps = new PhysicsSimulator(fl, _dtime);
 		
 		
-		InputStream in= new FileInputStream (new File(_inFile));
+		InputStream in = new FileInputStream (new File(_inFile));
 		OutputStream out = null;
 
 		
-		if(_outFile!=null) {
+		if(_outFile!=null) 
+		{
 			out= new FileOutputStream (_outFile);
 		}
-		else {
+		else 
+		{
 			out=System.out;
 
 		}

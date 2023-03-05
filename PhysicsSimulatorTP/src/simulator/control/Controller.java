@@ -37,6 +37,24 @@ public class Controller {
             String groupId = g.toString();
             ps.addGroup(groupId);
         }
+        
+        if(jsonInput.has("laws")) {
+			//laws array
+			JSONArray laws= jsonInput.getJSONArray("laws");	
+		
+			//we add the laws
+			for(int i=0;i<laws.length();++i) {
+
+				//id and info for the factory
+				ps.setForceLaws(laws.getJSONObject(i).getString("id"), fl.createInstance(laws.getJSONObject(i).getJSONObject("laws")));
+			}
+		}
+		
+		JSONArray bodies= jsonInput.getJSONArray("bodies");
+		for(int i=0; i<bodies.length();i++) {
+			
+			ps.addBody(fb.createInstance(bodies.getJSONObject(i)));
+		}
 	}
 	
 	public void run(int n, OutputStream out)
