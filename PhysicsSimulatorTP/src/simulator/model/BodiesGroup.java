@@ -39,15 +39,14 @@ public class BodiesGroup {
 	
 	void addBody(Body body)
 	{
-		/*if (b == null || bodies.contains(b) || bodies.stream().anyMatch(body -> body.equals(b))) {
-            throw new IllegalArgumentException("Invalid body");
-        }*/
-		for(Body b: bodies) 
+		if (body == null) 
 		{
-			if( body == null || b.id == body.id ) 
-			{	
-				throw new IllegalArgumentException();
-			}
+            throw new IllegalArgumentException("Invalid null body");
+        }
+		for(Body b: bodies ) 
+		{
+			if(b.getId() == body.getId())
+				throw new IllegalArgumentException("Invalid body: Body's id is already in use");
 		}
         this.bodies.add(body);
 	}
@@ -57,13 +56,15 @@ public class BodiesGroup {
 		if (dt <= 0) {
             throw new IllegalArgumentException("Invalid time step");
         }
-        for (Body body : bodies) {
+        for (Body body : bodies) 
+        {
             body.resetForce();
         }
         
         forceLaws.apply(bodies);
         
         for (Body body : bodies) 
+        	
         {
             body.advance(dt);
         }

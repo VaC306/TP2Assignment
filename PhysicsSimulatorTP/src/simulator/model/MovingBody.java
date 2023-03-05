@@ -21,7 +21,6 @@ public class MovingBody extends Body{
         Vector2D a = getForce().scale(1 / getMass());
         
         // Compute new position and velocity
-        
         Vector2D newPos = getPosition().plus(getVelocity().scale(dt)).plus(a.scale(0.5 * dt * dt));
         Vector2D newVel = getVelocity().plus(a.scale(dt));
 
