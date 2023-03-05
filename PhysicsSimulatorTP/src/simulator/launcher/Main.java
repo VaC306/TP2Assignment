@@ -52,22 +52,16 @@ public class Main {
 
 	private static void initFactories() {
 		
-		//se crea el array
 		ArrayList<Builder<Body>> bodyBuilders = new ArrayList<>();
-		//se a�aden los constructores
-		bodyBuilders.add(new MovingBodyBuilder());
 		bodyBuilders.add(new StationaryBodyBuilder());
-		//se crea la factoria
+		bodyBuilders.add(new MovingBodyBuilder());
 		_bodyFactory = new BuilderBasedFactory<Body>(bodyBuilders);
 		
 		
-		//se crea el array
 		ArrayList<Builder<ForceLaws>> forceLawsBuilders = new ArrayList<>();
-		//se a�anden
-		forceLawsBuilders.add(new MovingTowardsFixedPointBuilder());
 		forceLawsBuilders.add(new NewtonUniversalGravitationBuilder());
+		forceLawsBuilders.add(new MovingTowardsFixedPointBuilder());
 		forceLawsBuilders.add(new NoForceBuilder());
-		//se crea la factoria
 		_forceLawsFactory= new  BuilderBasedFactory <ForceLaws>(forceLawsBuilders);
 	
 	}
@@ -87,8 +81,9 @@ public class Main {
 			parseInFileOption(line);
 			parseOutFileOption(line);
 			parseDeltaTimeOption(line);
-			parseForceLawsOption(line);
 			parseStepsOption(line);
+			parseForceLawsOption(line);
+			
 
 			// if there are some remaining arguments, then something wrong is
 			// provided in the command line!
@@ -169,7 +164,6 @@ public class Main {
 
 	private static void parseOutFileOption(CommandLine line) throws ParseException {
 		_outFile = line.getOptionValue("o", null);
-
 	}
 	
 	
@@ -180,7 +174,17 @@ public class Main {
 			throw new ParseException("In batch mode an input file of bodies is required");
 		}
 	}
-
+	
+	private static void parseStepsOption(CommandLine line) throws ParseException {
+		String steps = line.getOptionValue("s", _stepsDefaultValue.toString());
+		try {
+			_steps = Integer.parseInt(steps);
+			assert (_steps > 0);
+		} catch (Exception e) {
+			throw new ParseException("Invalid steps: " + steps);	
+		}
+	}
+	
 	private static void parseDeltaTimeOption(CommandLine line) throws ParseException {
 		String dt = line.getOptionValue("dt", _dtimeDefaultValue.toString());
 		try {
@@ -191,15 +195,6 @@ public class Main {
 		}
 	}
 	
-	private static void parseStepsOption(CommandLine line) throws ParseException {
-		String steps = line.getOptionValue("s", _stepsDefaultValue.toString());
-		try {
-			_steps = Integer.parseInt(steps);
-			assert (_steps > 0);
-		} catch (Exception e) {
-			throw new ParseException("Invalid steps value: " + steps);
-		}
-	}
 
 	private static JSONObject parseWRTFactory(String v, Factory<?> factory) {
 
@@ -251,31 +246,20 @@ public class Main {
 
 	private static void startBatchMode() throws Exception {
 		
-		ForceLaws fl =_forceLawsFactory.createInstance(_forceLawsInfo);
+		ForceLaws fl = _forceLawsFactory.createInstance(_forceLawsInfo);
 		PhysicsSimulator ps = new PhysicsSimulator(fl, _dtime);
 		
-		
-		InputStream in = new FileInputStream (new File(_inFile));
 		OutputStream out = null;
-
+		InputStream in = new FileInputStream (new File(_inFile));
 		
 		if(_outFile!=null) 
-		{
-			out= new FileOutputStream (_outFile);
-		}
+			out = new FileOutputStream (_outFile);
 		else 
-		{
-			out=System.out;
-
-		}
+			out = System.out;
 		
-		
-		Controller control= new Controller(ps, _forceLawsFactory, _bodyFactory);
-		control.loadData(in);
-		control.run(_steps, out);
-		
-
-		
+		Controller c = new Controller(ps, _forceLawsFactory, _bodyFactory);
+		c.loadData(in);
+		c.run(_steps, out);
 	}
 
 	private static void start(String[] args) throws Exception {

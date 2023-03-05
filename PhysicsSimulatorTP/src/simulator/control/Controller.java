@@ -50,8 +50,9 @@ public class Controller {
 			}
 		}
 		
-		JSONArray bodies= jsonInput.getJSONArray("bodies");
-		for(int i=0; i<bodies.length();i++) {
+		JSONArray bodies = jsonInput.getJSONArray("bodies");
+		
+		for(int i=0; i < bodies.length();i++) {
 			
 			ps.addBody(fb.createInstance(bodies.getJSONObject(i)));
 		}

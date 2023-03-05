@@ -66,10 +66,12 @@ public class PhysicsSimulator {
 	public JSONObject getState() {
         JSONObject state = new JSONObject();
         state.put("time", currentTime);
-        List<String> groupIds = new ArrayList<>(groups.keySet());
+        List<String> gIds = new ArrayList<>(groups.keySet());
         JSONArray groupsArray = new JSONArray();
-        for (String groupId : groupIds) {
-            BodiesGroup group = groups.get(groupId);
+        
+        for (String gId : gIds) 
+        {
+            BodiesGroup group = groups.get(gId);
             groupsArray.put(group.getState());
         }
         state.put("groups", groupsArray);
