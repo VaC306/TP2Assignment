@@ -62,7 +62,7 @@ public class BodiesGroup {
         }
         
         forceLaws.apply(bodies);
-        
+                
         for (Body body : bodies) 
         	
         {
