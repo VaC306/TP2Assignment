@@ -2,7 +2,6 @@ package simulator.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import simulator.misc.Vector2D;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -43,9 +42,9 @@ public class BodiesGroup {
 		/*if (b == null || bodies.contains(b) || bodies.stream().anyMatch(body -> body.equals(b))) {
             throw new IllegalArgumentException("Invalid body");
         }*/
-		for(Body c: bodies) 
+		for(Body b: bodies) 
 		{
-			if( body ==null || c.id == body.id ) 
+			if( body == null || b.id == body.id ) 
 			{	
 				throw new IllegalArgumentException();
 			}
@@ -61,6 +60,7 @@ public class BodiesGroup {
         for (Body body : bodies) {
             body.resetForce();
         }
+        
         forceLaws.apply(bodies);
         
         for (Body body : bodies) 

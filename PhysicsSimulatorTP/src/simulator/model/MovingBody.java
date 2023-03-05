@@ -1,5 +1,6 @@
 package simulator.model;
 
+
 import simulator.misc.Vector2D;
 
 public class MovingBody extends Body{
@@ -17,16 +18,17 @@ public class MovingBody extends Body{
         }
 
         // Compute acceleration
-        Vector2D ab = getForce().scale(1 / getMass());
-        Vector2D a = new Vector2D(this.force.getX()/mass, this.force.getY()/mass);
+        Vector2D a = getForce().scale(1 / getMass());
         
         // Compute new position and velocity
+        
         Vector2D newPos = getPosition().plus(getVelocity().scale(dt)).plus(a.scale(0.5 * dt * dt));
         Vector2D newVel = getVelocity().plus(a.scale(dt));
 
         // Update position and velocity
         setPosition(newPos);
         setVelocity(newVel);
+        
     }
 		
 	private void setPosition(Vector2D newPos) {
