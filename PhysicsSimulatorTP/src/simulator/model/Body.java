@@ -14,7 +14,7 @@ public abstract class Body{
 	
 	Body(String id, String gid, Vector2D position, Vector2D velocity, double mass)
 	{
-	super();
+		//quitado el super()
 	 if (id == null || gid == null || velocity == null || position == null) {
          throw new IllegalArgumentException("Invalid input: parameters cannot be null.");
      }

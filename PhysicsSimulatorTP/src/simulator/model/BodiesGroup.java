@@ -39,13 +39,14 @@ public class BodiesGroup {
 	
 	void addBody(Body body)
 	{
-		if (body == null) 
+		if (body == null) //creo que borrar esto
 		{
             throw new IllegalArgumentException("Invalid null body");
         }
+//		if (bodies.contains(body))
 		for(Body b: bodies ) 
 		{
-			if(b.getId() == body.getId())
+			if(b.equals(body)) //usar contains or equal
 				throw new IllegalArgumentException("Invalid body: Body's id is already in use");
 		}
         this.bodies.add(body);

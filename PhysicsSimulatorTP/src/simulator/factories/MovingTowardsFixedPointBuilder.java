@@ -21,11 +21,6 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>{
 
 	@Override
 	protected MovingTowardsFixedPoint createInstance(JSONObject data) {
-		//if input is null
-		if(data == null) 
-		{
-			throw new IllegalArgumentException("Invalid input: parameter cannot be null.");
-		}
 		
 		Vector2D c = new Vector2D();
 		if(	data.has("c")) {

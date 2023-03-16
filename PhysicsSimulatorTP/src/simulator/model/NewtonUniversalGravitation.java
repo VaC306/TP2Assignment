@@ -17,15 +17,23 @@ public class NewtonUniversalGravitation implements ForceLaws{
 
 	    @Override
 	    public void apply(List<Body> bodies) {
+	    	//hacer el bucle for each en vez
 	        for (int i = 0; i < bodies.size(); i++) {
+	    	//for(Body body: bodies)
 	            Body bi = bodies.get(i);
 	            for (int j = i + 1; j < bodies.size(); j++) {
 	                Body bj = bodies.get(j);
 	                Vector2D dij = bj.getPosition().minus(bi.getPosition());
-	                double fi = G * bi.getMass() * bj.getMass() / Math.pow(dij.magnitude(), 2);
-	                Vector2D fij = dij.direction().scale(fi);
-	                bi.addForce(fij);
-	                bj.addForce(fij.scale(-1));
+	                
+	                if(Math.pow(dij.magnitude(), 2) < 0)
+	    	    		throw new IllegalArgumentException("dij has to be greater thar 0"); //verse que poner en esta excepcion
+	                else
+	                {
+	                	double fi = G * bi.getMass() * bj.getMass() / Math.pow(dij.magnitude(), 2);
+		                Vector2D fij = dij.direction().scale(fi);
+		                bi.addForce(fij);
+		                bj.addForce(fij.scale(-1));
+	                }
 	            }
 	        }
 	    }

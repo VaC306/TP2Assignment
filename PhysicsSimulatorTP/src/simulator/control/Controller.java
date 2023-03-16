@@ -66,16 +66,14 @@ public class Controller {
 		p.println("{");
 		p.println("\"states\": [");
 
+		p.print(ps.getState());
+
 	    // Run simulation
-	    for(int i=0;i<n;i++) 
+	    for(int i = 0; i < n; i++) 
 	    {
 			ps.advance();
+			p.print(", ");
 			p.print(ps.getState());
-			
-			if(i+1!=n) 	
-			{
-				p.print(", ");
-			}
 		}
 	    // Write output to stream
 	    p.println("]");

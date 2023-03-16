@@ -11,14 +11,17 @@ public class MovingBody extends Body{
 	
 	@Override
     public void advance(double dt) {
-		
-		// If mass is 0, do not move the body
+	
+	Vector2D a;
+		// If mass is 0, do not move the body. Move it with a = 0,0
         if (getMass() == 0) {
-            return;
+            a = new Vector2D();
         }
-
-        // Compute acceleration
-        Vector2D a = getForce().scale(1 / getMass());
+        else
+        {
+        	// Compute acceleration
+            a = getForce().scale(1 / getMass());
+        }
         
         // Compute new position and velocity
         Vector2D newPos = getPosition().plus(getVelocity().scale(dt)).plus(a.scale(0.5 * dt * dt));
